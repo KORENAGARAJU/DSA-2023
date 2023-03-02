@@ -1,10 +1,10 @@
-package LinkedList;
+package LinkedList.singlyLinkedList;
 
 import java.rmi.server.ExportException;
 
 public class LinkedList {
-    Node head ;
-    Node tail ;
+     Node head ;
+     Node tail ;
     int size ;
    //creating a linkedListNode
     private class Node{
@@ -16,11 +16,11 @@ public class LinkedList {
             this.next = null ;
         }
     }
-    //GetSize
+    //GetSize //tc -> O(1)
     public int Size(){
         return  this.size ;
     }
-    //GetFirst element in LinkedList
+    //GetFirst element in LinkedList TC-> O(1)
     public int getFirst()throws Exception{
         if(this.head == null){
             throw new Exception("the size of linkedList is zero") ;
@@ -29,7 +29,7 @@ public class LinkedList {
             return this.head.val ;
         }
     }
-    //getLast
+    //getLast O(1)
     public int getLast()throws Exception{
         if(this.size == 0){
             throw new Exception("the size of linkedList is zero") ;
@@ -38,7 +38,7 @@ public class LinkedList {
             return this.tail.val ;
         }
     }
-    //getAt given index
+    //getAt given index [ TC -> o(N)]
     public int getAt(int index)throws Exception{
         if(this.size == 0 ){
             throw new Exception("Size of linkedList is 0");
@@ -66,7 +66,7 @@ public class LinkedList {
             this.size += 1 ;
         }
     }
-    //addLast
+    //addLast TC->O(1)
     public void addLast(int data){
         Node newNode = new Node(data) ;
         if(this.size == 0){
@@ -120,7 +120,7 @@ public class LinkedList {
 
     public int removeFirst()throws  Exception{
         if(this.size == 0){
-            throw new Exception("linkedlist size is zero how u can del first") ;
+            throw new Exception("linked-list size is zero how u can del first") ;
         }
         int removedElement = this.head.val ;
         if(this.size == 1){
@@ -141,6 +141,7 @@ public class LinkedList {
         int removedValue = this.tail.val ;
         if(this.size == 1 ){
             this.head= this.tail = null ;
+            this.size = 0 ;
         }
         else{
             Node currentNode = getNodeAt(this.size-2) ;
@@ -149,6 +150,44 @@ public class LinkedList {
             this.size -= 1 ;
         }
         return removedValue ;
+    }
+    //removeAt
+    public int removeAt(int index)throws Exception{
+        if(this.size == 0){
+            throw new Exception("linked-list size is zero how u can del first") ;
+        }
+        if(index<0 || index>=this.size){
+            throw new Exception("Index out of bound"+"Index :" + index+" Size: "+this.size) ;
+        }
+        if(index == 0 ){
+            return this.removeFirst() ;
+
+        }
+        else if(index == this.size-1){
+            return  this.removeLast() ;
+
+        }else {
+            Node previousNodeOfIndex = getNodeAt(index-1) ;
+            int removedValue = previousNodeOfIndex.next.val ;
+            Node afterIndexNode = getNodeAt(index+1 );
+            previousNodeOfIndex.next = afterIndexNode ;
+            this.size -= 1 ;
+            return  removedValue ;
+        }
+    }
+    public void deleteAll(){
+        this.head = null ;
+        this.tail = null ;
+        this.size = 0 ;
+    }
+    //display the linkedList - [tc->o(n)]
+    public void displayList(){
+        Node temp = this.head ;
+        while(temp != null){
+            System.out.print(temp.val +"->");
+            temp = temp.next ;
+        }
+        System.out.println("null");
     }
 
 }
