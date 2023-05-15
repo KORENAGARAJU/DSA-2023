@@ -1,7 +1,5 @@
 package LinkedList.DoublyLinkedList;
 
-import LinkedList.singlyLinkedList.LinkedList;
-
 public class DoublyLinkedList {
     Node head ;
     Node tail ;

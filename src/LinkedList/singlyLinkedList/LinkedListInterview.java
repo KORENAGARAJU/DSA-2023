@@ -1,13 +1,11 @@
 package LinkedList.singlyLinkedList;
 
-import java.rmi.server.ExportException;
-
-public class LinkedList {
+public class LinkedListInterview {
      Node head ;
      Node tail ;
     int size ;
    //creating a linkedListNode
-    private class Node{
+     class Node{
         int val ;
         Node next;
 
